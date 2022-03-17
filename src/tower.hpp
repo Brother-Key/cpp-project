@@ -14,7 +14,8 @@ class Terminal;
 class Tower
 {
 private:
-    using AircraftToTerminal      = std::vector<std::pair<const Aircraft*, size_t>>;
+    //using AircraftToTerminal      = std::vector<std::pair<const Aircraft*, size_t>>;
+    //using AircraftToTerminal      = std::map;
     using AircraftAndTerminalIter = AircraftToTerminal::iterator;
 
     Airport& airport;

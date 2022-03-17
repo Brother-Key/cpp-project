@@ -117,16 +117,20 @@ Réalisez ensuite un schéma présentant comment ces différentes classes intér
 
 ## Tower :
 
-### get_instructions()
+### WaypointQueue get_instructions(Aircraft& aircraft)
 
 ```md
-
+Permet de donner des instructions au avions.
+Tout d'abord si l'avion n'est pas a un terminal, on teste s'il est proche de
+l'aéroport si ce n'est pas le cas alors il est guidé jusqu'à l'aéroport.
+Ensuite si un terminal est disponible il est reservé pour l'avion sinon l'avion tourne autour de l'aéroport.
+Sinon l'avion est mis en service au terminal, une fois la mise en service terminé l'avion est prêt à partir.
 ```
 
-### arrived_at_terminal()
+### void arrived_at_terminal(consr Aircraft& aircraft)
 
 ```md
-
+Permet de changer l'etat d'un avion en lui assignant un terminal.
 ```
 
 ## Aircaft :
@@ -134,13 +138,13 @@ Réalisez ensuite un schéma présentant comment ces différentes classes intér
 ### const st::string& get_flight_num() const
 
 ```md
-
+C'est getter sur le champs flight_num d'un Aircraft.
 ```
 
 ### float distance_to(const Point3D& p) const
 
 ```md
-
+Cette méthode prend en paramettre un point et retourne la distance de l'Aircracft a ce point.
 ```
 
 ### void display() const override
@@ -150,6 +154,42 @@ Permet d'afficher un Avion, dans cet méthode on récupere la texture (GL::Textu
 ```
 
 ### void move() override
+
+```md
+C'est la méthode qui permet de mettre en mouvement un Aircraft.
+```
+
+## Airport
+
+### Tower& get_tower()
+
+```md
+C'est un getter sur un 'Tower' de l'aéroport.
+```
+
+### void display() const override
+
+```md
+Cette méthode permet d'afficher un Airport a l'aide de son champs 'texture' et
+sa position 'pos'.
+```
+
+### void move() override
+
+```md
+Un aéroport ne pouvant conceptuellement pas se déplacer, cette méthode à pour effet
+d'appeler la méthode move de tout les terminales de l'aéroport.
+```
+
+## Terminal
+
+### bool in_use() const
+
+```md
+Cette méthode renvoie Vrai si un Termianl est occupé par un 'Aircraft' sinon Faux.
+```
+
+### bool is_servicing() const
 
 ```md
 
@@ -166,12 +206,24 @@ Expliquez les intérêts de ce choix.
    Le Concorde est censé pouvoir voler plus vite que les autres avions.
    Modifiez le programme pour tenir compte de cela.
 
+```md
+Les vitesses maximales et accélération de chaque avion sont définies dans la classe AicraftType
+```
+
 2. Identifiez quelle variable contrôle le framerate de la simulation.
    Ajoutez deux nouveaux inputs au programme permettant d'augmenter ou de diminuer cette valeur.
    Essayez maintenant de mettre en pause le programme en manipulant ce framerate. Que se passe-t-il ?\
    Ajoutez une nouvelle fonctionnalité au programme pour mettre le programme en pause, et qui ne passe pas par le framerate.
 
+```md
+La variable ticks_per_sec permet de contrôler le framrate de la simulation. On trouve cette variable dans le fichier opengl_interface.hpp
+```
+
 3. Identifiez quelle variable contrôle le temps de débarquement des avions et doublez-le.
+
+```md
+La variable SERVICES_CYCLES du fichier config.hpp permet de contrôler le temps de débarquement des avions.
+```
 
 4. Lorsqu'un avion a décollé, il réattérit peu de temps après.
    Faites en sorte qu'à la place, il soit retiré du programme.\
