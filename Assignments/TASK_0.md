@@ -265,13 +265,27 @@ La variable SERVICES_CYCLES du fichier config.hpp permet de contrôler le temps 
    Que devez-vous modifier pour transmettre l'information de la première à la seconde fonction ?
 
 ```md
-
+Pour cet question l'idée est de déterminer l'état de l'avion grace a sa position et
+indirectement par rapport a son déplacement.
+La modification a apporter et au niveau de l'Aircraft et plus précissément
+dans la méhthode move().
+On souhaite obtenir si un Aircraft est en mouvement, la méthode actuellement est un
+void, on change cela en retournant un boolean qui vas nous servir dans la callstack,
+car nous ne pouvons pas nous permettre de le supprimer lors d'un appel dans l'Aircraft.
+Initialement l'Aircraft demander a un Tower les instructions a suivre
+et donc le chemin a emprunter.
+Pour faire en sorte que l'Aircraft arrete de se déplacer, on modifie
+le Tower afin qu'il renvoie une instruction vide au bon moment.
 ```
 
 5. Lorsqu'un objet de type `Displayable` est créé, il faut ajouter celui-ci manuellement dans la liste des objets à afficher.
    Il faut également penser à le supprimer de cette liste avant de le détruire.
    Faites en sorte que l'ajout et la suppression de `display_queue` soit "automatiquement gérée" lorsqu'un `Displayable` est créé ou détruit.
    Pourquoi n'est-il pas spécialement pertinent d'en faire de même pour `DynamicObject` ?
+
+```md
+
+```
 
 6. La tour de contrôle a besoin de stocker pour tout `Aircraft` le `Terminal` qui lui est actuellement attribué, afin de pouvoir le libérer une fois que l'avion décolle.
    Cette information est actuellement enregistrée dans un `std::vector<std::pair<const Aircraft*, size_t>>` (size_t représentant l'indice du terminal).
