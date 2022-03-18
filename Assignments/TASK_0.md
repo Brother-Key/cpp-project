@@ -192,10 +192,41 @@ Cette méthode renvoie Vrai si un Termianl est occupé par un 'Aircraft' sinon F
 ### bool is_servicing() const
 
 ```md
+Cette méthode permet de déterminer si le service d'un avions est
+en cours.
+```
 
+### void assign_craft(const Aircraft& aircraft)
+
+```md
+Permet d'assigner un 'Aircraft' a un Terminal.
+```
+
+### void start_service(const Aircraft& aircraft)
+
+```md
+Cette méthode permet de lancer le service sur l'Aircraft.
+Un message est affiché a des fin de log.
+```
+
+### void finish_service()
+
+```md
+Met fin au service d'un 'Aircraft'.
+Un message est affiché a des fin de log.
+```
+
+### void move() override
+
+```md
+Incrémente le status du service_progress.
 ```
 
 Quelles classes et fonctions sont impliquées dans la génération du chemin d'un avion ?
+
+```md
+
+```
 
 Quel conteneur de la librairie standard a été choisi pour représenter le chemin ?
 Expliquez les intérêts de ce choix.
@@ -232,6 +263,10 @@ La variable SERVICES_CYCLES du fichier config.hpp permet de contrôler le temps 
    Pourquoi n'est-il pas sûr de procéder au retrait de l'avion dans cette fonction ?
    A quel endroit de la callstack pourriez-vous le faire à la place ?\
    Que devez-vous modifier pour transmettre l'information de la première à la seconde fonction ?
+
+```md
+
+```
 
 5. Lorsqu'un objet de type `Displayable` est créé, il faut ajouter celui-ci manuellement dans la liste des objets à afficher.
    Il faut également penser à le supprimer de cette liste avant de le détruire.
