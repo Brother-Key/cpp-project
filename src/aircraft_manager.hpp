@@ -11,9 +11,11 @@
 // Aircraft present dans la simulation, pour cela on met en place une liste d'Aricraft
 
 // 1 - Nous avons donc très vite besoin d'une méthode add afin d'ajouter des Aircraft
+// 2 - Notre AircraftManager herite de DynamicObject car il est demander dans le sujet que
+// le AircraftManager soit ajouter dans la move_queue qui prend en parametre des DynamicObject
+// 3 - Implémentation de la méthode move
 
-
-class AircraftManager
+class AircraftManager : public GL::DynamicObject
 {
 private:
 
@@ -22,8 +24,12 @@ private:
 
 public:
     
-
     void add(std::unique_ptr<Aircraft> aircraft);
+
+    // TASK_1
+    // Cet méthode nous permet d'appeler move sur les aircrafts stocke dans notre liste
+    // lors de l'appel a move dans le timer
+    bool move() override;
 
 };
 

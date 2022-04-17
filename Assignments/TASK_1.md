@@ -31,7 +31,8 @@ Réfléchissez aux pour et contre de chacune de ces options.
 Pour le restant de l'exercice, vous partirez sur le premier choix.
 
 ```md
-Mise en place de notre class `AircraftManager`.
+Mise en place de notre class `AircraftManager`, avec les différents méthode qui v'ont nous
+permettant la gestion des Aircraft.
 ```
 
 ### B - Déterminer le propriétaire de chaque avion
@@ -42,9 +43,30 @@ Il serait donc bon de savoir qui est censé détruire les avions du programme, a
 Répondez aux questions suivantes :
 
 1. Qui est responsable de détruire les avions du programme ? (si vous ne trouvez pas, faites/continuez la question 4 dans TASK_0)
+
+```md
+C'est l'appel a la méthode timer qui possède la responsabilité de lancée la
+destruction d'un Aircraft.
+```
+
 2. Quelles autres structures contiennent une référence sur un avion au moment où il doit être détruit ?
+
+```md
+Les structures qui possède une référence sur un avion au moment de sa déstruction
+sont : la move_queue et display_queue.
+```
+
 3. Comment fait-on pour supprimer la référence sur un avion qui va être détruit dans ces structures ?
+
+```md
+On les supprime manuellement avec un appel a erase.
+```
+
 4. Pourquoi n'est-il pas très judicieux d'essayer d'appliquer la même chose pour votre `AircraftManager` ?
+
+```md
+
+```
 
 Pour simplifier le problème, vous allez déplacer l'ownership des avions dans la classe `AircraftManager`.
 Vous allez également faire en sorte que ce soit cette classe qui s'occupe de déplacer les avions, et non plus la fonction `timer`.
@@ -61,6 +83,10 @@ Faites le nécessaire pour que le gestionnaire supprime les avions après qu'ils
 
 Enfin, faites ce qu'il faut pour que `create_aircraft` donne l'avion qu'elle crée au gestionnaire.
 Testez que le programme fonctionne toujours.
+
+```md
+On apporte les modifications dans noter tower_sim.
+```
 
 ---
 
