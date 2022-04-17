@@ -7,6 +7,12 @@ Chaque avion créé est ensuite placé dans les files `GL::display_queue` et `GL
 
 Si à un moment quelconque du programme, vous souhaitiez accéder à l'avion ayant le numéro de vol "AF1250", que devriez-vous faire ?
 
+```md
+Dans l'architecture actuel du programme nous serions obligé de parcourir
+notre move_queue qui contient des dynamiques objects. On devrai également
+déterminer si les éléments dans la move_queue sont des aircraft.
+```
+
 ---
 
 ## Objectif 1 - Référencement des avions
@@ -16,6 +22,7 @@ Si à un moment quelconque du programme, vous souhaitiez accéder à l'avion aya
 Pour trouver un avion particulier dans le programme, ce serait pratique d'avoir une classe qui référence tous les avions et qui peut donc nous renvoyer celui qui nous intéresse.
 
 Vous avez 2 choix possibles :
+
 - créer une nouvelle classe, `AircraftManager`, qui assumera ce rôle,
 - donner ce rôle à une classe existante.
 
@@ -23,12 +30,17 @@ Réfléchissez aux pour et contre de chacune de ces options.
 
 Pour le restant de l'exercice, vous partirez sur le premier choix.
 
+```md
+Mise en place de notre class `AircraftManager`.
+```
+
 ### B - Déterminer le propriétaire de chaque avion
 
 Vous allez introduire une nouvelle liste de références sur les avions du programme.
 Il serait donc bon de savoir qui est censé détruire les avions du programme, afin de déterminer comment vous allez pouvoir mettre à jour votre gestionnaire d'avions lorsque l'un d'entre eux disparaît.
 
 Répondez aux questions suivantes :
+
 1. Qui est responsable de détruire les avions du programme ? (si vous ne trouvez pas, faites/continuez la question 4 dans TASK_0)
 2. Quelles autres structures contiennent une référence sur un avion au moment où il doit être détruit ?
 3. Comment fait-on pour supprimer la référence sur un avion qui va être détruit dans ces structures ?
@@ -57,6 +69,7 @@ Testez que le programme fonctionne toujours.
 ### A - Création d'une factory
 
 La création des avions est faite à partir des composants suivants :
+
 - `create_aircraft`
 - `create_random_aircraft`
 - `airlines`

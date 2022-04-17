@@ -31,5 +31,8 @@ inline void init_aircraft_types()
 {
     aircraft_types[0] = new AircraftType { .02f, .05f, .02f, MediaPath { "l1011_48px.png" } };
     aircraft_types[1] = new AircraftType { .02f, .05f, .02f, MediaPath { "b707_jat.png" } };
+    // TASK_0
+    // C - bidouillons
+    // Modification du ground_speed, air_speed et accel du concorde
     aircraft_types[2] = new AircraftType { .04f, .10f, .04f, MediaPath { "concorde_af.png" } };
 }

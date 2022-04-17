@@ -248,6 +248,8 @@ Les vitesses maximales et accélération de chaque avion sont définies dans la 
 
 ```md
 La variable ticks_per_sec permet de contrôler le framrate de la simulation. On trouve cette variable dans le fichier opengl_interface.hpp
+Pour la mise en place de la fonctionnalité de pause, on introduit un boolean dans la librairie opengl_interface.
+La méthode timer dans opengl_interface.cpp se retrouve modifié qui lance la simulation uniquement lorsque la simulation n'est pas en pause.
 ```
 
 3. Identifiez quelle variable contrôle le temps de débarquement des avions et doublez-le.
@@ -284,7 +286,13 @@ le Tower afin qu'il renvoie une instruction vide au bon moment.
    Pourquoi n'est-il pas spécialement pertinent d'en faire de même pour `DynamicObject` ?
 
 ```md
-
+Pour cela on passe notre display_queue en static et public dans notre classe Displayable.
+On modifie le constructeur afin d'ajouter le displayble en cours de construction
+dans la liste display_queue.
+On modifie également le destructeur de la classe Displayable afin de l'enlever.
+Il n'est pas pertinant d'en faire de même pour 'DynamicObject'
+car c'est une classe polymorphe qui nous sert d'interface avec
+des méthodes pure virtuel.
 ```
 
 6. La tour de contrôle a besoin de stocker pour tout `Aircraft` le `Terminal` qui lui est actuellement attribué, afin de pouvoir le libérer une fois que l'avion décolle.
@@ -293,12 +301,29 @@ le Tower afin qu'il renvoie une instruction vide au bon moment.
    Cela n'est pas grave tant que ce nombre est petit, mais pour préparer l'avenir, on aimerait bien remplacer le vector par un conteneur qui garantira des opérations efficaces, même s'il y a beaucoup de terminaux.\
    Modifiez le code afin d'utiliser un conteneur STL plus adapté. Normalement, à la fin, la fonction `find_craft_and_terminal(const Aicraft&)` ne devrait plus être nécessaire.
 
+```md
+On modifie notre vector en map, se qui nous permet de trouver facilement le terminal associé a un Aircraft. La méthode find_craft_and_terminal est remplacé par l'appel a un find des `reserved_terminals`.
+```
+
 ## D- Théorie
 
 1. Comment a-t-on fait pour que seule la classe `Tower` puisse réserver un terminal de l'aéroport ?
 
+```md
+Tower est la seule class pour réserver un terminal de l'aéroport, il n'y a que dans cette class ou l'aéroport est référencé.
+```
+
 2. En regardant le contenu de la fonction `void Aircraft::turn(Point3D direction)`, pourquoi selon-vous ne sommes-nous pas passer par une réference ?
-   Pensez-vous qu'il soit possible d'éviter la copie du `Point3D` passé en paramètre ?
+
+```md
+On peut pas mettre une référence constante car on utilise cap_lenght() qui modifie l'objet.
+```
+
+Pensez-vous qu'il soit possible d'éviter la copie du `Point3D` passé en paramètre ?
+
+```md
+On est obliger de passer par copie pour avoir le même Point3D au passage de cette fonction.
+```
 
 ## E- Bonus
 
